@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Colorful E-Commerce Store</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #f9d423, #ff4e50);
+      color: #333;
+    }
+    header {
+      background: #2c3e50;
+      color: white;
+      padding: 15px;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2em;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      background: #34495e;
+    }
+    nav a {
+      color: white;
+      padding: 14px 20px;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+    nav a:hover {
+      background: #1abc9c;
+    }
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 20px;
+    }
+    .product {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      margin: 15px;
+      width: 250px;
+      transition: transform 0.3s;
+      cursor: pointer;
+    }
+    .product:hover {
+      transform: scale(1.05);
+    }
+    .product img {
+      width: 100%;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+    }
+    .product-info {
+      padding: 15px;
+      text-align: center;
+    }
+    .product-info h3 {
+      margin: 10px 0;
+      color: #2c3e50;
+    }
+    .product-info p {
+      margin: 5px 0;
+      color: #7f8c8d;
+    }
+    .btn {
+      background: #e67e22;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .btn:hover {
+      background: #d35400;
+    }
+    #cart {
+      position: fixed;
+      right: 20px;
+      top: 80px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      padding: 15px;
+      width: 250px;
+      max-height: 400px;
+      overflow-y: auto;
+    }
+    #cart h2 {
+      margin-top: 0;
+      color: #2c3e50;
+    }
+    #cart ul {
+      list-style: none;
+      padding: 0;
+    }
+    #cart ul li {
+      margin: 8px 0;
+      font-size: 0.9em;
+    }
+    footer {
+      background: #2c3e50;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🌈 My Colorful Store</h1>
+  </header>
+  <nav>
+    <a href="#">Home</a>
+    <a href="#">Shop</a>
+    <a href="#">About</a>
+    <a href="#">Contact</a>
+  </nav>
+  <div class="container">
+    <div class="product">
+      <img src="https://via.placeholder.com/250x150/ff6f61/ffffff?text=Shoes" alt="Shoes">
+      <div class="product-info">
+        <h3>Stylish Shoes</h3>
+        <p>$49.99</p>
+        <button class="btn" onclick="addToCart('Stylish Shoes', 49.99)">Add to Cart</button>
+      </div>
+    </div>
+    <div class="product">
+      <img src="https://via.placeholder.com/250x150/6a89cc/ffffff?text=Bag" alt="Bag">
+      <div class="product-info">
+        <h3>Trendy Bag</h3>
+        <p>$39.99</p>
+        <button class="btn" onclick="addToCart('Trendy Bag', 39.99)">Add to Cart</button>
+      </div>
+    </div>
+    <div class="product">
+      <img src="https://via.placeholder.com/250x150/f8c291/ffffff?text=Watch" alt="Watch">
+      <div class="product-info">
+        <h3>Smart Watch</h3>
+        <p>$99.99</p>
+        <button class="btn" onclick="addToCart('Smart Watch', 99.99)">Add to Cart</button>
+      </div>
+    </div>
+    <div class="product">
+      <img src="https://via.placeholder.com/250x150/82ccdd/ffffff?text=Headphones" alt="Headphones">
+      <div class="product-info">
+        <h3>Cool Headphones</h3>
+        <p>$59.99</p>
+        <button class="btn" onclick="addToCart('Cool Headphones', 59.99)">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+  <div id="cart">
+    <h2>🛒 Cart</h2>
+    <ul id="cart-items"></ul>
+    <p><strong>Total: $<span id="cart-total">0.00</span></strong></p>
+  </div>
+  <footer>
+    <p>&copy; 2026 My Colorful Store. All rights reserved.</p>
+  </footer>
+
+  <script>
+    let cart = [];
+    function addToCart(product, price) {
+      cart.push({product, price});
+      renderCart();
+    }
+    function renderCart() {
+      const cartItems = document.getElementById('cart-items');
+      cartItems.innerHTML = '';
+      let total = 0;
+      cart.forEach(item => {
+        const li = document.createElement('li');
+        li.textContent = `${item.product} - $${item.price.toFixed(2)}`;
+        cartItems.appendChild(li);
+        total += item.price;
+      });
+      document.getElementById('cart-total').textContent = total.toFixed(2);
+    }
+  </script>
+</body>
+</html>
